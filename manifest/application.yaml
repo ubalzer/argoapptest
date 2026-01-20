@@ -4,18 +4,20 @@ metadata:
   name: flask-app
   namespace: argocd
   annotations:
-    argocd-image-updater.argoproj.io/image-list: <account-id>.dkr.ecr.us-west-2.amazonaws.com/flask-app:~1.0
+    argocd-image-updater.argoproj.io/image-list: 437327607644.dkr.ecr.eu-central-1.amazonaws.com/argo-test:latest
     argocd-image-updater.argoproj.io/write-back-method: argocd
     argocd-image-updater.argoproj.io/update-strategy: newest-build
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
 
 spec:
   project: default
   source:
-    repoURL: https://github.com/devopscube/argocd-image-updater.git
+    repoURL: https://github.com/ubalzer/argoapptest
     targetRevision: main
     path: flask-app
   destination:
-    server: https://kubernetes.default.svc
+    server: https://B23C8BDA23AD045EFAE247AE7916F51F.gr7.eu-central-1.eks.amazonaws.com
     namespace: default
   syncPolicy:
     automated:

@@ -1,8 +1,8 @@
 config:
   registries:
     - name: ECR
-      api_url: https://<account-id>.dkr.ecr.us-west-2.amazonaws.com
-      prefix: <account-id>.dkr.ecr.us-west-2.amazonaws.com
+      api_url: https://437327607644.dkr.ecr.eu-central-1.amazonaws.com
+      prefix: 437327607644.dkr.ecr.eu-central-1.amazonaws.com
       ping: yes
       insecure: no
       credentials: ext:/scripts/login.sh
@@ -13,4 +13,4 @@ authScripts:
   scripts:
       login.sh: |
         #!/bin/sh
-        aws ecr --region "us-west-2" get-authorization-token --output text --query 'authorizationData[].authorizationToken' | base64 -d
+        aws ecr --region "eu-central-1" get-authorization-token --output text --query 'authorizationData[].authorizationToken' | base64 -d
