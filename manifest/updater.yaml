@@ -17,8 +17,8 @@ spec:
               name: "image.repository"
               tag: "image.tag"
       writeBackConfig:
-        method: "git:secret:argocd-image-updater/git-creds"
+        method: "git:secret:argocd/ssh-git-creds"
         gitConfig:
           repository: "git@github.com:ubalzer/argoapptest.git"
           branch: "main"
-          writeBackTarget: "helmvalues:flask-app/values.yaml"
+          writeBackTarget: "helmvalues:./values.yaml"
