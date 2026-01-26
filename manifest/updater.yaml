@@ -1,0 +1,24 @@
+apiVersion: argocd-image-updater.argoproj.io/v1alpha1
+kind: ImageUpdater
+metadata:
+  name: image-updater
+spec:
+  namespace: argocd
+  applicationRefs:
+    # This will be used for app-1 (most specific - exact match)
+    - namePattern: "flask-app"
+      images:
+        - alias: "argo-test"
+          imageName: "437327607644.dkr.ecr.eu-central-1.amazonaws.com/argo-test"
+          commonUpdateSettings:
+            updateStrategy: newest-build
+          manifestTargets:
+            helm:
+              name: "image.repository"
+              tag: "image.tag"
+      writeBackConfig:
+        method: "git:secret:argocd-image-updater/git-creds"
+        gitConfig:
+          repository: "git@github.com:ubalzer/argoapptest.git"
+          branch: "main"
+          writeBackTarget: "helmvalues:flask-app/values.yaml"
